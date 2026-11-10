@@ -1,0 +1,45 @@
+# Cabin acoustics and passenger position.
+
+absorption_frequencies:
+  value: [50, 125, 250, 500, 1000, 2000, 5000]
+  unit: Hz
+  source: ASM
+  note: "Support points for the mean absorption coefficient below"
+
+absorption_coefficients:
+  value: [0.10, 0.18, 0.30, 0.45, 0.55, 0.60, 0.60]
+  unit: "-"
+  source: ASM
+  note: "Mean Sabine absorption of a furnished VIP cabin (carpet, upholstery, curtains)"
+
+seat_x:
+  value: -8.0
+  unit: m
+  source: ASM
+  note: "Axial position of the evaluated passenger (inside the VIP section)"
+
+seat_side:
+  value: right
+  unit: "-"
+  source: ASM
+  note: "Window seat on the engine side used for the head-position result"
+
+head_height_above_floor:
+  value: 1.10
+  unit: m
+  source: ASM
+  note: "Seated ear height above floor"
+  verify: "Does ISO 5129 really give this value for the passenger's head height?"
+
+head_distance_from_trim:
+  value: 0.45
+  unit: m
+  source: ASM
+  note: "Horizontal distance from trim panel surface to the head centre"
+
+sil_target:
+  value: [48.0, 52.0]
+  unit: dB
+  source: DOC
+  note: "VIP cabin SIL target range"
+  verify: "Is the VIP cabin target really 48-52 dB SIL?"

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EB205 Quiet Cabin</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <h1>EB205</h1>
+    <nav></nav>
+  </header>
+  <section class="hero">
+    <h1>A quieter VIP cabin for the Boeing 787-9</h1>
+    <p>Engine noise and the turbulent boundary layer shake the composite skin; the sidewall lets part of that
+      energy into the cabin. We stack three treatments on the sidewall and model each one from the engine
+      to the passenger's ear.</p>
+  </section>
+
+  <div class="grid3">
+    <div class="card"><h2>1 · Passive layers</h2><p class="sub">Damping layer on the skin, denser blanket and a
+      heavy septum in the cavity. Works at every frequency and costs mass.</p></div>
+    <div class="card"><h2>2 · Shunted piezo patches</h2><p class="sub">PZT patches on each skin bay, each wired to a
+      tuned RL circuit that turns the bay's vibration into heat at its resonance.</p></div>
+    <div class="card"><h2>3 · Active trim panel</h2><p class="sub">Piezo actuators on the trim panel and error
+      microphones at head height; an FxLMS controller cancels the engine tones around the head.</p></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Model results at the passenger's head</h2>
+    <p class="sub">Window seat on the engine side, cruise at 35 000 ft, Mach 0.85. VIP target:
+      <span id="target"></span> SIL.</p>
+    <div class="table-wrap"><table class="results" id="results"></table></div>
+    <p class="sub" style="margin-top:8px">Differences between solutions are more reliable than absolute levels.
+      Every input is tagged as from our archive, literature, or our assumption; the assumption register lists the
+      ones still to be verified.</p>
+  </div>
+
+  <h2 style="font-size:17px;margin:22px 0 10px">Explore</h2>
+  <div class="grid3">
+    <a class="card" href="listen.html"><h2>Listen</h2><p class="sub">Hear the cabin with each solution and switch
+      between them without losing your place.</p></a>
+    <a class="card" href="fdtd.html"><h2>Cross-section waves</h2><p class="sub">Watch engine sound cross the
+      sidewall layers into the cabin, baseline next to a treated wall.</p></a>
+    <a class="card" href="quiet_zone.html"><h2>Quiet zone</h2><p class="sub">How large the zone of silence around
+      the head is, and why it shrinks with frequency.</p></a>
+    <a class="card" href="bay.html"><h2>Skin bay</h2><p class="sub">One skin bay vibrating, with the piezo
+      patches short-circuited and shunted.</p></a>
+    <a class="card" href="heatmap.html"><h2>3D heat map</h2><p class="sub">Where the engines hit the fuselage
+      hardest.</p></a>
+  </div>
+</div>
+<script src="data/demo_data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/index_page.js"></script>
+</body>
+</html>

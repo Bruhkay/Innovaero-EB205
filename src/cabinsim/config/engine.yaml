@@ -1,0 +1,73 @@
+# Engine noise source. Coordinate system used everywhere in cabinsim:
+#   origin on the fuselage axis, in the plane of the engine fan face
+#   x along the fuselage axis, positive AFT (with the external flow)
+#   y positive to STARBOARD (right), z positive UP
+
+acoustic_power:
+  value: 138.0
+  unit: W
+  source: DOC
+  note: "W = eta F U_inf = 138 W per engine (EB205.pdf p.18) -> Lw = 141.4 dB re 1 pW"
+  verify: "What is the source for modelling the engine at 141.4 dB?"
+
+position:
+  value: [0.0, 9.8, -1.6]
+  unit: m
+  source: ASM
+  note: "Right engine fan-face centre. Spanwise ~9.8 m and 1.6 m below the axis estimated from 787-9 drawings; check against Boeing 787 Airport Planning document"
+
+mirror_left_engine:
+  value: true
+  unit: "-"
+  source: ASM
+  note: "Add a second, identical engine at y -> -y"
+
+fan_blades:
+  value: 18
+  unit: "-"
+  source: LIT
+  note: "GEnx-1B has 18 composite fan blades (GE Aviation)"
+
+fan_diameter:
+  value: 2.82
+  unit: m
+  source: LIT
+  note: "GEnx-1B fan diameter 111.1 in (GE Aviation catalogue)"
+  verify: "Are the engine dimensions as given (2.8 m fan)?"
+
+n1_speed:
+  value: 2300.0
+  unit: rpm
+  source: ASM
+  note: "Cruise N1 (low-pressure spool) speed. Sets shaft frequency 38.3 Hz and BPF 690 Hz"
+
+tone_energy_fraction:
+  value: 0.30
+  unit: "-"
+  source: ASM
+  note: "Share of the acoustic power that is in tones (BPF, harmonics, buzz-saw)"
+
+# Tones: shaft order and relative weight (weights are normalised in code).
+tones:
+  value: [[18, 0.60], [36, 0.25], [3, 0.10], [6, 0.05]]
+  unit: "[shaft order, weight]"
+  source: ASM
+  note: "BPF (order 18), 2xBPF, and two low buzz-saw orders"
+
+broadband_peak_frequency:
+  value: 500.0
+  unit: Hz
+  source: ASM
+  note: "Peak of the broadband log-parabola spectrum"
+
+broadband_curvature:
+  value: 1.5
+  unit: dB/octave^2
+  source: ASM
+  note: "Broadband level falls by curvature * (octaves from peak)^2"
+
+shadow_loss:
+  value: 15.0
+  unit: dB
+  source: ASM
+  note: "Extra loss on fuselage panels that do not see the engine (geometric shadow)"

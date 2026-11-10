@@ -1,0 +1,45 @@
+# Turbulent boundary layer (TBL) excitation of the skin.
+
+wall_shear_stress:
+  value: 15.5
+  unit: Pa
+  source: DOC
+  note: "tau_w at cruise"
+  verify: "Turbulent boundary layer giving Tw = 15.5 Pa and delta = 0.21 m: what is this?"
+
+boundary_layer_thickness:
+  value: 0.21
+  unit: m
+  source: DOC
+  note: "delta at the cabin station"
+
+convection_velocity_ratio:
+  value: 0.7
+  unit: "-"
+  source: LIT
+  note: "U_c / U_inf, usual range 0.6-0.8 (Corcos 1964)"
+  verify: "What does convection at 0.7 U mean?"
+
+corcos_alpha_streamwise:
+  value: 0.11
+  unit: "-"
+  source: LIT
+  note: "Corcos decay constant along the flow (Maxit et al. 2019)"
+
+corcos_alpha_spanwise:
+  value: 0.77
+  unit: "-"
+  source: LIT
+  note: "Corcos decay constant across the flow (Maxit et al. 2019)"
+
+wavenumber_model:
+  value: mellen
+  unit: "-"
+  source: ASM
+  note: "mellen (elliptic, Mellen 1990) is the default; corcos is kept as an upper bound because it over-predicts the low-wavenumber region"
+
+enabled:
+  value: true
+  unit: "-"
+  source: ASM
+  note: "Switch the TBL path on/off"

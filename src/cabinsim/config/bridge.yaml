@@ -1,0 +1,19 @@
+# Structure-borne path: skin -> frames -> trim attachment points -> trim panel.
+
+enabled:
+  value: true
+  unit: "-"
+  source: ASM
+  note: "Switch the bridge path on/off"
+
+point_spacing:
+  value: 0.46
+  unit: m
+  source: ASM
+  note: "Mean spacing e between trim attachment points (Sharp 1978 point-bridge model)"
+
+isolator_gain:
+  value: 15.0
+  unit: dB
+  source: ASM
+  note: "Insertion loss of the trim isolators (grommets); should be measured"

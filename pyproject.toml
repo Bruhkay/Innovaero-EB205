@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cabinsim"
+version = "0.1.0"
+description = "EB205 InnovAero: VIP cabin noise simulation (Boeing 787-9 sidewall, piezo shunts, active trim panel)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Team EB205" }]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "matplotlib>=3.8"]
+plots = ["matplotlib>=3.8"]
+app = ["streamlit>=1.50", "matplotlib>=3.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cabinsim = ["config/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

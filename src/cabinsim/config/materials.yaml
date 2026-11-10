@@ -1,0 +1,47 @@
+# Material database. Add a new material by copying a block and changing the numbers.
+# Solutions (solutions.yaml) refer to materials by their key.
+
+# Isotropic (or quasi-isotropic) solids: E, density, Poisson ratio, loss factor.
+solids:
+  CFRP_QI:
+    youngs_modulus: {value: 60.0e+9, unit: Pa, source: ASM, note: "Quasi-isotropic carbon/epoxy laminate; 45-60 GPa is the usual range. 60 GPa with t = 4 mm reproduces f11 = 335 Hz from the archive", verify: "Are the CFRP laminate values really the ones in the report?"}
+    density: {value: 1550.0, unit: kg/m^3, source: LIT, note: "Carbon/epoxy, ~60 % fibre volume"}
+    poisson_ratio: {value: 0.30, unit: "-", source: LIT, note: "Quasi-isotropic laminate"}
+    loss_factor: {value: 0.010, unit: "-", source: LIT, note: "Undamped CFRP skin, typical 0.005-0.015"}
+  Al2024:
+    youngs_modulus: {value: 73.1e+9, unit: Pa, source: LIT, note: "Aluminium 2024-T3"}
+    density: {value: 2780.0, unit: kg/m^3, source: LIT, note: "Aluminium 2024-T3"}
+    poisson_ratio: {value: 0.33, unit: "-", source: LIT, note: "Aluminium 2024-T3"}
+    loss_factor: {value: 0.002, unit: "-", source: LIT, note: "Bare aluminium skin"}
+
+# Ready-made panels given directly by surface mass and bending stiffness.
+panels:
+  honeycomb_trim:
+    surface_mass: {value: 1.5, unit: kg/m^2, source: ASM, note: "Nomex honeycomb sandwich with glass/phenolic faces, ~10 mm"}
+    bending_stiffness: {value: 400.0, unit: N*m, source: ASM, note: "Sandwich D = E_f t_f h^2 / (2 (1 - nu^2)), order 250-500 N m"}
+    loss_factor: {value: 0.02, unit: "-", source: ASM, note: "Honeycomb sandwich"}
+    thickness: {value: 0.010, unit: m, source: ASM, note: "Total panel thickness"}
+  limp_septum:
+    surface_mass: {value: 1.0, unit: kg/m^2, source: ASM, note: "Mass-loaded vinyl septum; surface mass is set per solution"}
+    bending_stiffness: {value: 1.0e-3, unit: N*m, source: ASM, note: "Practically limp"}
+    loss_factor: {value: 0.10, unit: "-", source: ASM, note: "Viscoelastic vinyl"}
+    thickness: {value: 0.0005, unit: m, source: ASM, note: "Nominal"}
+
+# Fibrous blankets: Delany-Bazley-Miki equivalent fluid needs flow resistivity.
+porous:
+  Microlite_AA_0.42pcf:
+    flow_resistivity: {value: 12000.0, unit: Pa*s/m^2, source: ASM, note: "Bies-Hansen fibre formula gives 12-26 kPa s/m^2 for 1.5-2 um glass fibres at 6.7 kg/m^3"}
+    density: {value: 6.7, unit: kg/m^3, source: LIT, note: "0.42 lb/ft^3 = 6.7 kg/m^3"}
+  Microlite_AA_0.60pcf:
+    flow_resistivity: {value: 20000.0, unit: Pa*s/m^2, source: ASM, note: "Scaled from 0.42 pcf with sigma ~ density^1.53 (Bies-Hansen)"}
+    density: {value: 9.6, unit: kg/m^3, source: LIT, note: "0.60 lb/ft^3 = 9.6 kg/m^3"}
+
+# Piezoceramic for shunt patches and trim actuators (datasheet constants).
+piezo:
+  PZT5A:
+    youngs_modulus: {value: 61.0e+9, unit: Pa, source: LIT, note: "1/s11^E, PZT-5A datasheet"}
+    density: {value: 7750.0, unit: kg/m^3, source: LIT, note: "PZT-5A datasheet"}
+    poisson_ratio: {value: 0.35, unit: "-", source: LIT, note: "-s12^E/s11^E, PZT-5A datasheet"}
+    d31: {value: -171.0e-12, unit: C/N, source: LIT, note: "PZT-5A datasheet"}
+    relative_permittivity_free: {value: 1700.0, unit: "-", source: LIT, note: "eps33^T / eps0, PZT-5A datasheet"}
+    loss_factor: {value: 0.005, unit: "-", source: LIT, note: "Mechanical loss of PZT-5A"}

@@ -1,0 +1,165 @@
+# Active trim panel (V3): PZT actuators on the trim panel, error microphones at the
+# passenger's head, multichannel FxLMS. The panel size comes from fuselage.trim_panel_size
+# and the head distance from cabin.head_distance_from_trim.
+
+panel_loss_factor:
+  value: 0.03
+  unit: "-"
+  source: ASM
+  note: "Trim panel incl. mounting damping"
+
+actuator_positions:
+  value: [[0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7]]
+  unit: "fraction of panel size"
+  source: ASM
+  note: "2 x 2 PZT patches"
+
+actuator_size:
+  value: 0.10
+  unit: m
+  source: ASM
+  note: "Square PZT patch side length"
+
+actuator_thickness:
+  value: 0.25e-3
+  unit: m
+  source: ASM
+  note: "PZT patch thickness"
+
+microphone_offsets:
+  value: [[-0.10, -0.08, 0.0], [0.10, -0.08, 0.0], [-0.10, 0.08, 0.0], [0.10, 0.08, 0.0]]
+  unit: m
+  source: ASM
+  note: "Error microphones around the head centre (in panel x, panel y, normal)"
+
+head_centre_on_panel:
+  value: [0.50, 0.55]
+  unit: "fraction of panel size"
+  source: ASM
+  note: "Where the head centre projects onto the panel"
+
+zone_half_size:
+  value: [0.15, 0.15, 0.10]
+  unit: m
+  source: ASM
+  note: "Quiet-zone evaluation box around the head centre (30 x 30 x 20 cm)"
+
+zone_points:
+  value: [5, 5, 3]
+  unit: "-"
+  source: ASM
+  note: "Grid points in the evaluation box (75 points)"
+
+primary_incidence_angle:
+  value: 30.0
+  unit: deg
+  source: ASM
+  note: "Cavity pressure on the trim panel modelled as an oblique plane wave"
+
+diffuse_plane_waves:
+  value: 64
+  unit: "-"
+  source: ASM
+  note: "Number of random plane waves used to synthesise the diffuse (reverberant + other panels) field"
+
+reference_coherence:
+  value: 0.9
+  unit: "-"
+  source: ASM
+  note: "Coherence between the broadband reference sensor and the controlled panel's own radiation"
+
+shaft_orders:
+  value: [3, 6, 18]
+  unit: "-"
+  source: ASM
+  note: "Tones controlled by the tonal FxLMS (18 = BPF). Reference from the N1 tacho"
+
+broadband_band:
+  value: [50.0, 1000.0]
+  unit: Hz
+  source: ASM
+  note: "Frequency range of the broadband controller"
+
+sample_rate:
+  value: 4000
+  unit: Hz
+  source: ASM
+  note: "Controller sample rate"
+
+duration:
+  value: 8.0
+  unit: s
+  source: ASM
+  note: "Simulated time (4 s with --fast)"
+
+control_start:
+  value: 1.0
+  unit: s
+  source: ASM
+  note: "Controller is switched on at this time"
+
+evaluation_window:
+  value: 1.5
+  unit: s
+  source: ASM
+  note: "Attenuation is measured over the last part of the simulation"
+
+step_size_tonal:
+  value: 0.002
+  unit: "-"
+  source: ASM
+  note: "Normalised step size of the preconditioned tonal FxLMS. Unstable above ~0.003 because the lightly damped trim panel delays the secondary path (~0.09 s group delay)"
+
+regularisation_tonal:
+  value: 0.2
+  unit: "-"
+  source: ASM
+  note: "Tikhonov term relative to the largest eigenvalue of S^H S; trades mic cancellation for lower voltage and a more robust zone"
+
+leakage_tonal:
+  value: 1.0e-5
+  unit: "-"
+  source: ASM
+  note: "Weight leakage per sample (robustness)"
+
+step_size_broadband:
+  value: 0.03
+  unit: "-"
+  source: ASM
+  note: "Normalised step size of the broadband FxLMS"
+
+leakage_broadband:
+  value: 5.0e-5
+  unit: "-"
+  source: ASM
+  note: "Weight leakage per sample"
+
+filter_taps_broadband:
+  value: 96
+  unit: "-"
+  source: ASM
+  note: "FIR length per actuator"
+
+impulse_response_taps:
+  value: 4096
+  unit: "-"
+  source: ASM
+  note: "Length of the plant impulse responses (1 s at 4 kHz)"
+
+max_actuator_voltage:
+  value: 140.0
+  unit: V rms
+  source: ASM
+  note: "Practical drive limit of a 0.25 mm PZT patch"
+
+convergence_tolerance:
+  value: 1.0
+  unit: dB
+  source: ASM
+  note: "Error power change between the last two evaluation windows below which the run counts as converged"
+
+random_seed:
+  value: 0
+  unit: "-"
+  source: ASM
+  note: "Seed for noise and diffuse-field phases (results are reproducible)"

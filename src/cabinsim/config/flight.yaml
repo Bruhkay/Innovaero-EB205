@@ -1,0 +1,38 @@
+# Flight condition. Air properties are NOT typed in here: they are computed from
+# altitude with the ISA model (cabinsim/atmosphere.py), so they stay consistent.
+#
+# Every number is written as
+#   name: {value: ..., unit: ..., source: DOC | LIT | ASM, note: "..."}
+# DOC = team archive (EB205.pdf), LIT = literature, ASM = our assumption.
+# `verify:` links an entry to the verification list in EB205.pdf (pp. 7-8).
+
+cruise_altitude:
+  value: 10668.0
+  unit: m
+  source: ASM
+  note: "35 000 ft, typical long-haul cruise level"
+
+cruise_mach:
+  value: 0.85
+  unit: "-"
+  source: LIT
+  note: "Boeing 787 typical cruise Mach number"
+
+cabin_altitude:
+  value: 1829.0
+  unit: m
+  source: LIT
+  note: "787 cabin pressure altitude 6000 ft (Boeing marketing data)"
+
+cabin_temperature:
+  value: 295.15
+  unit: K
+  source: ASM
+  note: "22 degC cabin air"
+
+ground_temperature_offset:
+  value: 0.0
+  unit: K
+  source: ASM
+  note: "ISA standard day (ISA+0)"
+  verify: "Does the ISA really give the values in Table 1?"

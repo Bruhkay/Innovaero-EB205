@@ -1,0 +1,44 @@
+# Shunted piezo patches on one skin bay (frame pitch x stringer pitch).
+
+material: PZT5A
+
+patch_thickness:
+  value: 0.25e-3
+  unit: m
+  source: ASM
+  note: "Thin PZT wafer bonded to the skin"
+
+# Each patch: centre (x/a, y/b), size (m), and the bay mode its shunt is tuned to.
+# x is axial (frame pitch a), y is circumferential (stringer pitch b).
+patches:
+  value:
+    - {centre: [0.50, 0.50], size: [0.16, 0.10], target_mode: [1, 1]}
+    - {centre: [0.25, 0.50], size: [0.10, 0.10], target_mode: [2, 1]}
+    - {centre: [0.75, 0.50], size: [0.10, 0.10], target_mode: [3, 1]}
+  unit: "-, m"
+  source: ASM
+  note: "Patches at the anti-nodes of the first three axial modes"
+
+shunt_type:
+  value: RL
+  unit: "-"
+  source: ASM
+  note: "RL resonant shunt (Hagood & von Flotow 1991). Options: RL, R, negC, open, short"
+
+negative_capacitance_ratio:
+  value: -0.90
+  unit: "-"
+  source: ASM
+  note: "C_neg = ratio * Cp for the negC option"
+
+tuning_condition:
+  value: cruise
+  unit: "-"
+  source: ASM
+  note: "Tune shunts to bay modes with cabin-pressure tension (cruise) or without it (ground)"
+
+bay_boundary_condition:
+  value: simply_supported
+  unit: "-"
+  source: ASM
+  note: "Real frame/stringer attachment is between simply supported and clamped"

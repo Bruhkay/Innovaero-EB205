@@ -1,0 +1,103 @@
+# Settings of the illustrative visuals (demo pages). They do not change any number in results.json.
+
+fdtd_cell_size:
+  value: 0.04
+  unit: m
+  source: ASM
+  note: "Grid spacing of the cross-section FDTD (8 cells per wavelength at ~900 Hz in cold outside air)"
+
+fdtd_sidewall_exaggeration:
+  value: 2.5
+  unit: "-"
+  source: ASM
+  note: "Sidewall drawn this many times thicker so its layers are visible. Each fluid layer is stretched exactly (rho/e, kappa*e, sigma/e), so normal-incidence transmission is unchanged"
+
+fdtd_plate_cells:
+  value: 1.5
+  unit: cells
+  source: ASM
+  note: "Radial thickness of each plate ring; >= sqrt(2) keeps the staircase ring closed (no diagonal leaks)"
+
+fdtd_domain:
+  value: [-3.6, 11.2, -3.6, 3.6]
+  unit: m
+  source: ASM
+  note: "Cross-section window [y_min, y_max, z_min, z_max]; includes the right engine"
+
+fdtd_sponge_cells:
+  value: 20
+  unit: cells
+  source: ASM
+  note: "Absorbing layer at the domain edges"
+
+fdtd_compare_solution:
+  value: V1_passive
+  unit: "-"
+  source: ASM
+  note: "Solution shown next to the baseline (the FDTD shows passive layers only)"
+
+heatmap_fuselage_x:
+  value: [-27.0, 36.0]
+  unit: m
+  source: ASM
+  note: "Nose and tail x of the simplified 787-9 fuselage (63 m long) relative to the fan face"
+
+heatmap_resolution:
+  value: [0.5, 5.0]
+  unit: "m, deg"
+  source: ASM
+  note: "Axial and circumferential spacing of the heat-map mesh"
+
+bay_frequency_range:
+  value: [250.0, 1100.0, 60]
+  unit: "Hz, Hz, count"
+  source: ASM
+  note: "Frequencies at which the bay vibration is exported for the animation"
+
+bay_incidence:
+  value: [20.0, 0.0]
+  unit: deg
+  source: ASM
+  note: "Incident plane wave (polar, azimuth) driving the animated bay"
+
+quiet_zone_slice:
+  value: [1.0, 1.0, 51]
+  unit: "m, m, points"
+  source: ASM
+  note: "Horizontal slice through the head: width along the panel, depth into the cabin, points per side"
+
+quiet_zone_realisations:
+  value: 16
+  unit: "-"
+  source: ASM
+  note: "Random diffuse-field realisations averaged in the quiet-zone maps"
+
+audio_sample_rate:
+  value: 44100
+  unit: Hz
+  source: ASM
+  note: "Sample rate of the auralisation .wav files"
+
+audio_duration:
+  value: 8.0
+  unit: s
+  source: ASM
+  note: "Length of each .wav; the signal is exactly periodic so it loops without a click"
+
+audio_n1_mismatch:
+  value: 0.002
+  unit: "-"
+  source: ASM
+  note: "Relative N1 difference between the two engines; makes the tones beat as in a real cabin"
+
+audio_headroom_db:
+  value: 1.0
+  unit: dB
+  source: ASM
+  note: "Peak of the loudest file below digital full scale; all files share one gain"
+
+audio_rolloff_db_per_octave:
+  value: 12.0
+  unit: dB/octave
+  source: ASM
+  note: "Spectrum slope used outside the 50 Hz - 5 kHz band range"

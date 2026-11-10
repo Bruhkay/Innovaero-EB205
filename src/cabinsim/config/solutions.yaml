@@ -1,0 +1,55 @@
+# Noise-control solutions. Each one may `extends:` another and only list what changes,
+# so treatments stack on top of each other (V0 -> V1 -> V2 -> V3).
+# Rename a solution by changing its key and `label`; add V4 by copying a block.
+#
+# Sidewall stack from outside to inside:
+#   skin (+ optional damping layer) | blanket | (optional septum) | air gap | trim panel
+# The air gap is whatever is left of fuselage.sidewall_depth after the blanket.
+
+V0_baseline:
+  label: "V0 baseline"
+  description: "CFRP skin + 75 mm Microlite AA 0.42 pcf blanket + air gap + honeycomb trim"
+  skin:
+    material: CFRP_QI
+    thickness: {value: 0.004, unit: m, source: ASM, note: "Gives f11 = 335 Hz with the archive formula"}
+    added_mass: {value: 0.0, unit: kg/m^2, source: ASM, note: "No damping treatment"}
+    added_loss_factor: {value: 0.0, unit: "-", source: ASM, note: "No damping treatment"}
+  blanket:
+    material: Microlite_AA_0.42pcf
+    thickness: {value: 0.075, unit: m, source: ASM, note: "Typical 3 in blanket"}
+  septum:
+    enabled: false
+    surface_mass: {value: 0.0, unit: kg/m^2, source: ASM, note: "No septum"}
+  trim:
+    panel: honeycomb_trim
+    added_mass: {value: 0.0, unit: kg/m^2, source: ASM, note: "Bare trim panel"}
+  piezo_shunt: false
+  active_trim: false
+
+V1_passive:
+  extends: V0_baseline
+  label: "V1 passive"
+  description: "V0 + constrained-layer damping on skin, denser/thicker blanket, 1 kg/m^2 septum"
+  skin:
+    added_mass: {value: 0.5, unit: kg/m^2, source: ASM, note: "Constrained-layer damping tape (viscoelastic + aluminium foil)"}
+    added_loss_factor: {value: 0.04, unit: "-", source: ASM, note: "CLD typically raises skin loss factor to 0.03-0.10"}
+  blanket:
+    material: Microlite_AA_0.60pcf
+    thickness: {value: 0.100, unit: m, source: ASM, note: "Thicker blanket, leaves 25 mm air gap"}
+  septum:
+    enabled: true
+    surface_mass: {value: 1.0, unit: kg/m^2, source: ASM, note: "Limp mass-loaded vinyl inside the cavity"}
+
+V2_shunt:
+  extends: V1_passive
+  label: "V2 + piezo shunt"
+  description: "V1 + RL-shunted PZT patches on every skin bay"
+  piezo_shunt: true
+
+V3_active:
+  extends: V2_shunt
+  label: "V3 + active trim"
+  description: "V2 + active trim panel (PZT actuators + FxLMS, error microphones at head height)"
+  trim:
+    added_mass: {value: 0.15, unit: kg/m^2, source: ASM, note: "Actuators and wiring spread over the trim panel"}
+  active_trim: true

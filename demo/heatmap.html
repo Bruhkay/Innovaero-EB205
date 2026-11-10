@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuselage Heat Map</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <h1>Engine noise on the fuselage</h1>
+    <nav></nav>
+  </header>
+  <p class="lead">Sound pressure level that the two engines put on the outside of the fuselage at cruise,
+    from the point-source projection of the main model (r and cos θ for every surface point).
+    The rings mark the VIP cabin section. Drag to rotate, scroll to zoom, hover for values.</p>
+  <div class="note">Simplified fuselage (cylinder with nose and tail cone). Not included: shielding by
+    wing and nacelle, diffraction, the flight stream. A real 787 mesh can replace the cylinder
+    (<code>cabinsim.heatmap.load_obj</code>).</div>
+  <div class="controls" id="bands"></div>
+  <div class="card">
+    <div id="view" class="view3d"></div>
+    <canvas id="bar" class="bar" width="360" height="48"></canvas>
+    <div class="stat">
+      <div>Highest level<b id="maxLevel">–</b></div>
+      <div>Mean over the VIP cabin section<b id="cabinLevel">–</b></div>
+      <div>Engine sound power (each)<b id="lw">–</b></div>
+    </div>
+  </div>
+</div>
+<script src="data/demo_data.js"></script>
+<script src="vendor/three.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/heatmap_page.js"></script>
+</body>
+</html>
